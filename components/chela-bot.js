@@ -9,7 +9,7 @@ var COMMANDS = {
     START: 'start',
     NEXT: 'next'
 };
-var TOKEN = 'YOUR_BOT_TOKEN';
+var TOKEN = 'BOT_TOKEN';
 
 /**
  * Executes a bot command.
@@ -92,8 +92,11 @@ function parseCommand(message) {
  * @param {Function} callback
  */
 exports.init = function(callback) {
+    var token = process.env.CHELA_BOT_TOKEN || TOKEN;
+    console.log('token:', token);
+
     var bot = new TelegramBot({
-        token: process.env.CHELA_BOT_TOKEN || TOKEN
+        token: token
     });
 
     bot.on('message', function(message) {
