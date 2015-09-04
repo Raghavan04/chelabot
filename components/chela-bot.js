@@ -92,7 +92,7 @@ function parseCommand(message) {
  * @param {Function} callback
  */
 exports.init = function(callback) {
-    var token = process.env.OPENSHIFT_CHELA_BOT_TOKEN || TOKEN;
+    var token = process.env.OPENSHIFT_CHELA_BOT_TOKEN || process.env.CHELA_BOT_TOKEN || TOKEN;
     console.log('token:', token);
 
     var bot = new TelegramBot({
