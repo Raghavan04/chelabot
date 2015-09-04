@@ -93,7 +93,7 @@ function parseCommand(message) {
  */
 exports.init = function(callback) {
     var token = process.env.CHELA_BOT_TOKEN || TOKEN;
-    console.log('token:', token);
+    //console.log('token:', token);
 
     var bot = new TelegramBot({
         token: token
