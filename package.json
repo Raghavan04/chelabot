@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "express": "~3.4.8",
-    "jsonfile": "~2.2.1",
     "lodash": "~3.10.1",
     "node-telegram-bot": "~0.1.1",
     "node-uuid": "~1.4.3"

@@ -1,8 +1,6 @@
 'use strict';
 
 var _ = require('lodash');
-var jsonfile = require('jsonfile');
-var path = require('path');
 var TelegramBot = require('node-telegram-bot');
 var u = require('./app-utils');
 var uuid = require('node-uuid');
@@ -11,6 +9,7 @@ var COMMANDS = {
     START: 'start',
     NEXT: 'next'
 };
+var TOKEN = 'YOUR_BOT_TOKEN';
 
 /**
  * Executes a bot command.
@@ -93,36 +92,27 @@ function parseCommand(message) {
  * @param {Function} callback
  */
 exports.init = function(callback) {
-    var secretJsonFilePath = [path.resolve('.'), 'secret.json'].join(path.sep);
-    //console.log('secretJsonFilePath:', secretJsonFilePath);
-    jsonfile.readFile(secretJsonFilePath, function(err, jsonData) {
-        if(err) {
-            if(_.isFunction(callback)) callback(err);
-            return;
-        }
-
-        var bot = new TelegramBot({
-            token: jsonData.telegramBotToken
-        });
-
-        bot.on('message', function(message) {
-            //console.log('message:', u.stringify(message));
-            if(!message) return;
-
-            var commandObj = parseCommand(message);
-            if(!commandObj) return;
-            executeCommand({
-                bot: bot,
-                chatId: message.chat.id,
-                command: commandObj
-            }, function(err) {
-                if(err) return console.error(err);
-                //console.log(commandObj.name + ' command has been executed successfully...');
-            });
-        });
-
-        bot.start();
-
-        if(_.isFunction(callback)) callback();
+    var bot = new TelegramBot({
+        token: process.env.CHELA_BOT_TOKEN || TOKEN
     });
+
+    bot.on('message', function(message) {
+        //console.log('message:', u.stringify(message));
+        if(!message) return;
+
+        var commandObj = parseCommand(message);
+        if(!commandObj) return;
+        executeCommand({
+            bot: bot,
+            chatId: message.chat.id,
+            command: commandObj
+        }, function(err) {
+            if(err) return console.error(err);
+            //console.log(commandObj.name + ' command has been executed successfully...');
+        });
+    });
+
+    bot.start();
+
+    if(_.isFunction(callback)) callback();
 };
