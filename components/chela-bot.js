@@ -24,7 +24,7 @@ function executeCommand(options, callback) {
     //console.log('commandName:', commandName);
 
     var commands = _.values(COMMANDS);
-    console.log('commands:', commands);
+    console.log('commandName:', commandName, 'commands:', commands);
     if(!commandName || !_.includes(commands, commandName)) {
         if(_.isFunction(callback)) callback(new Error('Invalid command: ' + commandName));
         return;
