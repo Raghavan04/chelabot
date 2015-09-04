@@ -7,9 +7,10 @@ var TelegramBot = require('node-telegram-bot');
 var u = require('./app-utils');
 var uuid = require('node-uuid');
 
-var COMMAND_START = 'start';
-var COMMAND_NEXT = 'next';
-var COMMANDS = [COMMAND_START, COMMAND_NEXT];
+var COMMANDS = {
+    START: 'start',
+    NEXT: 'next'
+};
 
 /**
  * Executes a bot command.
@@ -23,7 +24,7 @@ function executeCommand(options, callback) {
     var commandName = options.command.name;
     //console.log('commandName:', commandName);
 
-    if(!commandName || COMMANDS.indexOf(commandName) < 0) {
+    if(!commandName || !_.includes(_.values(COMMANDS), commandName)) {
         if(_.isFunction(callback)) callback(new Error('Invalid command: ' + commandName));
         return;
     }
@@ -39,10 +40,10 @@ function executeCommand(options, callback) {
 
     var commandOptions = _.pick(options, ['bot', 'chatId']);
     switch(commandName) {
-        case COMMAND_START:
+        case COMMANDS.START:
             executeCommandStart(commandOptions, callbackHandler);
             break;
-        case COMMAND_NEXT:
+        case COMMANDS.NEXT:
             executeCommandNext(commandOptions, callbackHandler);
             break;
     }
