@@ -23,7 +23,9 @@ function executeCommand(options, callback) {
     var commandName = options.command.name;
     //console.log('commandName:', commandName);
 
-    if(!commandName || !_.includes(_.values(COMMANDS), commandName)) {
+    var commands = _.values(COMMANDS);
+    console.log('commands:', commands);
+    if(!commandName || !_.includes(commands, commandName)) {
         if(_.isFunction(callback)) callback(new Error('Invalid command: ' + commandName));
         return;
     }
@@ -92,7 +94,7 @@ function parseCommand(message) {
  * @param {Function} callback
  */
 exports.init = function(callback) {
-    var token = process.env.OPENSHIFT_CHELA_BOT_TOKEN || process.env.CHELA_BOT_TOKEN || TOKEN;
+    var token = process.env.OPENSHIFT_CHELA_BOT_TOKEN || TOKEN;
     console.log('token:', token);
 
     var bot = new TelegramBot({
