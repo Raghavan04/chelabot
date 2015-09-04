@@ -15,7 +15,7 @@ var COMMANDS = [COMMAND_START, COMMAND_NEXT];
  * Executes a bot command.
  * @param {Object} options
  * @param {Object} options.bot - Bot instance
- * @para, {Number} options.chatId - Chat identifier
+ * @param {Number} options.chatId - Chat identifier
  * @param {Object} options.command - Command
  * @param {Function} callback
  */
