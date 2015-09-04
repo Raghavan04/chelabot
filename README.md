@@ -13,7 +13,9 @@ This bot randomly indicates who is next to drink beer.
 - `/next` : Indicates who is next to drink beer 
  
 ## License
+
 Copyright 2015 Huhgawz
+
 MIT LIcense
 
 ## Resources
